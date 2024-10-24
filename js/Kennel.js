@@ -1,14 +1,21 @@
-" use strict";
+"use strict";
 
 import { PetConfigs } from "./PetConfigs";
 import { KennelManager } from "./KennelManager";
 import { FormCreator } from "./FormCreator.js"
 
 export class Kennel {
+   constructor() {
+      this.initialize();
+   }
 
    initialize() {
-      const petConfigs = new PetConfigs().getPetConfigs();
-      new FormCreator(petConfigs);
-      new KennelManager(petConfigs);
+      try {
+         const petConfigs = new PetConfigs().getPetConfigs();
+         new FormCreator(petConfigs);
+         new KennelManager(petConfigs);
+      } catch {
+         console.error("Error initializing Kennel.");
+      }
    }
 }

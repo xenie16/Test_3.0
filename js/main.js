@@ -2,4 +2,8 @@
 
 import { Kennel } from "./Kennel.js";
 
-new Kennel().initialize();
+try {
+   new Kennel();
+} catch {
+   console.error("Error initializing Kennel application.");
+}
