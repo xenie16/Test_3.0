@@ -2,7 +2,7 @@
 
 import { PetConfigs } from "./PetConfigs";
 import { KennelManager } from "./KennelManager";
-import { FormCreator } from "./FormCreator.js"
+import { FormManipulator } from "./FormManipulator.js"
 
 export class Kennel {
    constructor() {
@@ -12,7 +12,7 @@ export class Kennel {
    initialize() {
       try {
          const petConfigs = new PetConfigs().getPetConfigs();
-         new FormCreator(petConfigs);
+         new FormManipulator(petConfigs);
          new KennelManager(petConfigs);
       } catch {
          console.error("Error initializing Kennel.");
