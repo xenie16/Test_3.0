@@ -1,7 +1,5 @@
 "use strict";
 
-import { PetConfigs } from "./PetConfigs";
-import { KennelManager } from "./KennelManager";
+import { Kennel } from "./Kennel.js";
 
-const petConfig = new PetConfigs().getConfig();
-new KennelManager(petConfig);
+new Kennel().initialize();
