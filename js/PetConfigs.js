@@ -6,22 +6,21 @@ export class PetConfigs {
          dog: {
             "extra info": "breed",
             "energy level": 100,
-            isDropdown: false,
          },
          cat: {
             "extra info": "FIV vaccinated",
             "energy level": 100,
-            isDropdown: true,
+            dropdownOptions: ['yes', 'no']
+
          },
          "guinea pig": {
             "extra info": "color",
             "energy level": 100,
-            isDropdown: false,
          }
       }
    }
 
-   getConfig() {
+   getPetConfigs() {
       return this.#configs.animals;
    }
 }
