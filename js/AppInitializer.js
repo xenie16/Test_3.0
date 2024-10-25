@@ -2,7 +2,7 @@
 
 import { PetConfigs } from "./PetConfigs.js";
 import { KennelManager } from "./KennelManager.js";
-import { FormManipulator } from "./FormManipulator.js"
+import { FormHandler } from "./FormHandler.js"
 import { PetDisplayer } from "./PetDisplayer.js";
 
 export class AppInitializer {
@@ -11,10 +11,10 @@ export class AppInitializer {
    }
 
    initialize() {
-      try {
-         const petConfigs = new PetConfigs().getPetConfigs();
-         new FormManipulator(petConfigs);
+      const petConfigs = new PetConfigs().getPetConfigs();
       const kennelManager = new KennelManager(petConfigs);
+
+      new FormHandler(petConfigs);
       new PetDisplayer(kennelManager);
    }
 }

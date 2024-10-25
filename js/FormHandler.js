@@ -1,6 +1,6 @@
 "use strict";
 
-export class FormManipulator {
+export class FormHandler {
    #animalTypeSelect = document.getElementById('animalTypeSelect');
    #selectedPet;
 
