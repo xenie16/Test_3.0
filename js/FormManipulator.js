@@ -36,11 +36,12 @@ export class FormManipulator {
 
       for (const [key, value] of Object.entries(petConfigs)) {
          if (key === selectedPet) {
-            const label = document.createElement('label');
-            label.textContent = value['extra info'];
+            petDetails.textContent = value['extra info'];
 
             if (value.dropdownOptions) {
                const select = document.createElement('select');
+               select.id = 'petDetailInput';
+
                value.dropdownOptions.forEach((element) => {
                   const option = document.createElement('option');
                   option.textContent = element;
@@ -48,17 +49,15 @@ export class FormManipulator {
 
                   select.appendChild(option);
                })
-               label.appendChild(select);
+               petDetails.appendChild(select);
             } else {
                const input = document.createElement('input');
                input.type = 'text';
+               input.id = 'petDetailInput';
 
-               label.appendChild(input);
+               petDetails.appendChild(input);
             }
-
-            petDetails.appendChild(label);
          }
-
       }
    }
 
