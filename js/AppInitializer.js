@@ -1,10 +1,10 @@
 "use strict";
 
-import { PetConfigs } from "./PetConfigs";
-import { KennelManager } from "./KennelManager";
+import { PetConfigs } from "./PetConfigs.js";
+import { KennelManager } from "./KennelManager.js";
 import { FormManipulator } from "./FormManipulator.js"
 
-export class Kennel {
+export class AppInitializer {
    constructor() {
       this.initialize();
    }
@@ -15,7 +15,7 @@ export class Kennel {
          new FormManipulator(petConfigs);
          new KennelManager(petConfigs);
       } catch {
-         console.error("Error initializing Kennel.");
+         console.error(`Error initializing Kennel: ${error}`);
       }
    }
 }

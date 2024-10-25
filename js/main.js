@@ -1,9 +1,9 @@
 "use strict";
 
-import { Kennel } from "./Kennel.js";
+import { AppInitializer } from "./AppInitializer.js";
 
 try {
-   new Kennel();
+   new AppInitializer();
 } catch {
-   console.error("Error initializing Kennel application.");
+   console.error(`Error initializing Kennel application: ${error}`);
 }
