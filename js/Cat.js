@@ -1,10 +1,10 @@
 "use strict"
 
 export class Cat {
-   constructor({ petName, petDetailInput }) {
-      this.petType = 'cat';
+   constructor({ petType, petName, petDetail, energyLevel }) {
+      this.petType = petType;
       this.petName = petName;
-      this.petDetailInput = petDetailInput;
-      this.energyLevel = 100;
+      this.petDetail = petDetail;
+      this.energyLevel = energyLevel;
    }
 }
