@@ -1,5 +1,7 @@
 "use strict";
 
+import { PetDisplayer } from "./PetDisplayer.js";
+
 import { Cat } from './Cat.js'
 import { Dog } from './Dog.js';
 import { GuineaPig } from './GuineaPig.js';
@@ -15,10 +17,12 @@ export class KennelManager {
 
    addEventListeners() {
       const addPetButton = document.getElementById('addPetButton');
+      const petDisplayer = new PetDisplayer()
 
       addPetButton.addEventListener("click", e => {
          e.preventDefault();
          this.addPetToKennel();
+         petDisplayer.showAllPets(this.#allPetsInKennel);
       })
    }
 

@@ -1,7 +1,12 @@
 "use strict";
 
 export class PetDisplayer {
-   constructor(kennelManager) {
-      // console.log(kennelManager)
+   constructor() {
+
+   }
+
+   showAllPets(allPets) {
+      console.log(allPets);
+
    }
 }
