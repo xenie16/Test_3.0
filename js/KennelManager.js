@@ -16,10 +16,10 @@ export class KennelManager {
    }
 
    addEventListeners() {
-      const addPetButton = document.getElementById('addPetButton');
+      const petForm = document.getElementById('petForm');
       const petDisplayer = new PetDisplayer()
 
-      addPetButton.addEventListener("click", e => {
+      petForm.addEventListener("submit", e => {
          e.preventDefault();
          this.addPetToKennel();
          petDisplayer.showAllPets(this.#allPetsInKennel);

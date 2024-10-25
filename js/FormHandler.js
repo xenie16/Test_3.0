@@ -54,6 +54,7 @@ export class FormHandler {
                const input = document.createElement('input');
                input.type = 'text';
                input.id = 'petDetailInput';
+               input.required = true;
 
                petDetails.appendChild(input);
             }
