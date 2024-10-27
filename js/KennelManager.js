@@ -7,9 +7,10 @@ import { Dog } from './Dog.js';
 import { GuineaPig } from './GuineaPig.js';
 
 export class KennelManager {
+   #pets = new Set();
+
    constructor(petConfigs) {
       this.petConfigs = petConfigs;
-
       this.addEventListeners();
    }
 
@@ -37,16 +38,17 @@ export class KennelManager {
             newPet = new Dog(details);
             break;
          case 'cat':
-            details.energyLevel = this.petConfigs['guinea pig']['energy level'];
+            details.energyLevel = this.petConfigs.cat['energy level'];
             newPet = new Cat(details);
             break;
          case 'guinea pig':
-            details.energyLevel = this.petConfigs.cat['energy level'];
+            details.energyLevel = this.petConfigs['guinea pig']['energy level'];
             newPet = new GuineaPig(details);
             break;
       }
 
-      const petDisplayer = new PetDisplayer()
+      this.#pets.add(newPet);
+      const petDisplayer = new PetDisplayer({ allPets: this.#pets, petConfigs: this.petConfigs });
       petDisplayer.showPet(newPet);
    }
 }

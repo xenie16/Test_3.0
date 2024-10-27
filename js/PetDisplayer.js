@@ -2,41 +2,17 @@
 
 export class PetDisplayer {
 
-   constructor(allPets) {
+   constructor({ allPets, petConfigs }) {
       this.allPets = allPets;
+      this.petConfigs = petConfigs;
    }
-
-   // showAllPets(allPets) {
-   //    this.allPets = allPets;
-
-   //    const ourPetsTitle = document.getElementById('ourPetsTitle');
-
-   //    for (const pet in this.allPets) {
-   //       const petType = this.allPets[pet].petType;
-   //       const petName = this.allPets[pet].petName;
-   //       const petDetail = this.allPets[pet].petDetail;
-   //       const energyLevel = this.allPets[pet].energyLevel;
-
-   //       const ul = document.createElement('ul');
-   //       console.log(ul)
-   //       ourPetsTitle.insertAdjacentElement("afterend", ul);
-
-   //       const petCard = `
-   //       <li><span class="bold">Pet type: </span>${petType}</li>
-   //       <li><span class="bold">Name: </span>${petName}</li>
-   //       <li><span class="bold">Details: </span>${petDetail}</li>
-   //       <li><span class="bold">Energy: </span>${energyLevel}</li>
-   //       `
-   //       ul.insertAdjacentHTML('beforeend', petCard);
-   //    }
-   // }
 
    showPet(newPet) {
       const allPetsSection = document.getElementById('allPetsSection');
       const ul = document.createElement('ul');
 
       const petId = `pet-${Date.now()}`
-      ul.id = petId
+      ul.id = petId;
 
       this.addPetDetails(ul, allPetsSection, newPet);
       this.addPetButtons(ul, newPet, petId);
@@ -44,12 +20,31 @@ export class PetDisplayer {
 
    addPetDetails(ul, allPetsSection, newPet) {
 
-      for (const [key, value] of Object.entries(newPet)) {
+      for (let [key, value] of Object.entries(newPet)) {
          const li = document.createElement('li');
-         li.textContent = `${key}: ${value}`
-         li.className = `${key}`
+         li.className = `${key}`;
 
-         ul.appendChild(li)
+         switch (key) {
+            case 'petType':
+               key = 'Type';
+               li.textContent = `${key}: ${value}`;
+               break;
+            case 'petName':
+               key = 'Name';
+               li.textContent = `${key}: ${value}`;
+               break;
+            case 'petDetail':
+               const petType = newPet.petType;
+               key = this.petConfigs[petType]['extra info'];
+               li.textContent = `${key}: ${value}`;
+               break;
+            case 'energyLevel':
+               key = 'Energy';
+               li.textContent = `${key}: ${value}`
+               break;
+         }
+
+         ul.appendChild(li);
       }
 
       allPetsSection.appendChild(ul);
@@ -67,7 +62,7 @@ export class PetDisplayer {
       }))
 
       ul.appendChild(li);
-      this.addEventListeners(newPet, petId)
+      this.addEventListeners(newPet, petId);
    }
 
    addEventListeners(newPet, petId) {
@@ -80,39 +75,39 @@ export class PetDisplayer {
 
       playWithAllButton.addEventListener("click", () => {
          const newEnergyLevel = newPet.playWithPet();
-         this.updateEnergy({ newEnergyLevel });
+         this.updateEnergy({ petId, newEnergyLevel });
       })
 
       feedAllButton.addEventListener("click", () => {
-
+         const newEnergyLevel = newPet.feedPet();
+         this.updateEnergy({ petId, newEnergyLevel });
       })
 
       playPetButton.addEventListener("click", () => {
-         const newEnergyLevel = newPet.playWithPet()
+         const newEnergyLevel = newPet.playWithPet();
          this.updateEnergy({ petId, newEnergyLevel });
       });
 
       feedPetButton.addEventListener("click", () => {
-         const newEnergyLevel = newPet.feedPet()
+         const newEnergyLevel = newPet.feedPet();
          this.updateEnergy({ petId, newEnergyLevel });
       });
 
       deletePetButton.addEventListener("click", () => {
-         newPet.deletePet(petId)
+         newPet.deletePet(petId);
       });
    }
 
    updateEnergy({ petId, newEnergyLevel }) {
       let energyLevelLi;
-      console.log(newEnergyLevel)
 
       if (petId) {
          energyLevelLi = document.querySelector(`#${petId} .energyLevel`);
-         energyLevelLi.textContent = `energyLevel: ${newEnergyLevel}`
+         energyLevelLi.textContent = `Energy: ${newEnergyLevel}`;
       } else {
          energyLevelLi = document.querySelectorAll('.energyLevel');
          energyLevelLi.forEach(liItem => {
-            liItem.textContent = `energyLevel: ${newEnergyLevel}`
+            liItem.textContent = `Energy: ${newEnergyLevel}`;
          })
       }
    }
