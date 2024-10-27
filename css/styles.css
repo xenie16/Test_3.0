@@ -1,0 +1,234 @@
+/* Global styles and variables */
+:root {
+   --primary-color: #4a90e2;
+   --background-color: #f5f7fa;
+   --play-color: #4CAF50;
+   /* Green for play - represents activity */
+   --feed-color: #FF9800;
+   /* Orange for feed - represents food */
+   --delete-color: #dc3545;
+   /* Red for delete - represents danger */
+   --border-radius: 8px;
+   --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+   font-family: 'Arial', sans-serif;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: var(--background-color);
+   line-height: 1.6;
+}
+
+/* Header styles */
+h1 {
+   color: var(--primary-color);
+   text-align: center;
+   font-size: 2.5rem;
+   margin-bottom: 2rem;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+   color: #333;
+   margin: 1.5rem 0;
+   font-size: 1.8rem;
+}
+
+/* Section styles */
+section {
+   background: white;
+   padding: 20px;
+   margin-bottom: 30px;
+   border-radius: var(--border-radius);
+   box-shadow: var(--box-shadow);
+}
+
+/* Form styles */
+#petForm {
+   display: grid;
+   gap: 15px;
+   max-width: 500px;
+   margin: 0 auto;
+}
+
+label {
+   display: block;
+   font-weight: bold;
+   margin-bottom: 5px;
+}
+
+input,
+select {
+   width: 100%;
+   padding: 8px;
+   border: 1px solid #ddd;
+   border-radius: var(--border-radius);
+   font-size: 1rem;
+}
+
+/* Add Pet Button */
+#addPetButton {
+   background-color: var(--primary-color);
+   color: white;
+   border: none;
+   padding: 10px 20px;
+   border-radius: var(--border-radius);
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+#addPetButton:hover {
+   background-color: #357abd;
+}
+
+/* Global Action Buttons */
+#feedAllButton,
+#playWithAllButton {
+   color: white;
+   border: none;
+   padding: 10px 20px;
+   border-radius: var(--border-radius);
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+   margin-right: 10px;
+}
+
+#playWithAllButton {
+   background-color: var(--play-color);
+}
+
+#feedAllButton {
+   background-color: var(--feed-color);
+}
+
+#playWithAllButton:hover {
+   background-color: #3d8b40;
+}
+
+#feedAllButton:hover {
+   background-color: #e68a00;
+}
+
+/* Pet grid layout */
+#allPetsSection {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+   gap: 20px;
+   padding: 20px;
+}
+
+/* Ensure title spans full width */
+#ourPetsTitle {
+   grid-column: 1 / -1;
+}
+
+#allPetsSection ul {
+   list-style: none;
+   padding: 15px;
+   margin: 0;
+   background: #f8f9fa;
+   border-radius: var(--border-radius);
+   border-left: 4px solid var(--primary-color);
+   height: fit-content;
+}
+
+#allPetsSection li {
+   margin-bottom: 8px;
+   font-size: 0.9rem;
+}
+
+.petName {
+   font-weight: bold;
+}
+
+.petType {
+   color: #666;
+   font-style: italic;
+}
+
+/* Pet action buttons container */
+#allPetsSection li:last-child {
+   display: flex;
+   gap: 5px;
+   margin-top: 1.5em;
+}
+
+/* Pet action buttons */
+[id^="play-pet-"] {
+   background-color: var(--play-color);
+   padding: 6px 12px;
+   font-size: 0.85rem;
+   flex: 1;
+   color: white;
+   border: none;
+   border-radius: var(--border-radius);
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+[id^="feed-pet-"] {
+   background-color: var(--feed-color);
+   padding: 6px 12px;
+   font-size: 0.85rem;
+   flex: 1;
+   color: white;
+   border: none;
+   border-radius: var(--border-radius);
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+[id^="delete-pet-"] {
+   background-color: var(--delete-color);
+   padding: 6px 12px;
+   font-size: 0.85rem;
+   flex: 1;
+   color: white;
+   border: none;
+   border-radius: var(--border-radius);
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+[id^="play-pet-"]:hover {
+   background-color: #3d8b40;
+}
+
+[id^="feed-pet-"]:hover {
+   background-color: #e68a00;
+}
+
+[id^="delete-pet-"]:hover {
+   background-color: #c82333;
+}
+
+@media (max-width: 900px) {
+   #allPetsSection {
+      grid-template-columns: repeat(2, 1fr);
+   }
+}
+
+@media (max-width: 600px) {
+   body {
+      padding: 10px;
+   }
+
+   h1 {
+      font-size: 2rem;
+   }
+
+   #petForm {
+      gap: 10px;
+   }
+
+   #allPetsSection {
+      grid-template-columns: 1fr;
+   }
+
+   button {
+      width: 100%;
+      margin-bottom: 10px;
+   }
+}
