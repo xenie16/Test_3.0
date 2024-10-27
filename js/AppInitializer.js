@@ -11,8 +11,8 @@ export class AppInitializer {
 
    initialize() {
       const petConfigs = new PetConfigs().getPetConfigs();
+      const formHandler = new FormHandler(petConfigs);
 
-      new KennelManager(petConfigs);
-      new FormHandler(petConfigs);
+      new KennelManager({ petConfigs, formHandler });
    }
 }

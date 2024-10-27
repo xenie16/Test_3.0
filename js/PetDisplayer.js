@@ -10,8 +10,7 @@ export class PetDisplayer {
    showPet(newPet) {
       const allPetsSection = document.getElementById('allPetsSection');
       const ul = document.createElement('ul');
-
-      const petId = `pet-${Date.now()}`
+      const petId = `pet-${Date.now()}`;
       ul.id = petId;
 
       this.addPetDetails(ul, allPetsSection, newPet);
@@ -19,7 +18,6 @@ export class PetDisplayer {
    }
 
    addPetDetails(ul, allPetsSection, newPet) {
-
       for (let [key, value] of Object.entries(newPet)) {
          const li = document.createElement('li');
          li.className = `${key}`;
