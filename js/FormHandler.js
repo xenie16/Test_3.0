@@ -15,6 +15,7 @@ export class FormHandler {
 
    addPetTypes() {
       const animalTypeSelect = this.#animalTypeSelect;
+      animalTypeSelect.innerHTML = '';
 
       for (const property in this.petConfigs) {
          const option = document.createElement('option');
@@ -69,5 +70,15 @@ export class FormHandler {
          this.#selectedPet = this.#animalTypeSelect.value;
          this.addPetDetails()
       })
+   }
+
+   resetForm() {
+      const petTypeSelect = document.getElementById('animalTypeSelect');
+      const petNameInput = document.getElementById('petNameInput');
+      const petDetailInput = document.getElementById('petDetailInput');
+
+      petTypeSelect.selectedIndex = 0;
+      petNameInput.value = '';
+      petDetailInput.value = '';
    }
 }

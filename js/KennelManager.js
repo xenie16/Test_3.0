@@ -9,8 +9,9 @@ import { GuineaPig } from './GuineaPig.js';
 export class KennelManager {
    #pets = new Set();
 
-   constructor(petConfigs) {
+   constructor({ petConfigs, formHandler }) {
       this.petConfigs = petConfigs;
+      this.formHandler = formHandler;
       this.addEventListeners();
    }
 
@@ -50,5 +51,7 @@ export class KennelManager {
       this.#pets.add(newPet);
       const petDisplayer = new PetDisplayer({ allPets: this.#pets, petConfigs: this.petConfigs });
       petDisplayer.showPet(newPet);
+
+      this.formHandler.resetForm();
    }
 }
