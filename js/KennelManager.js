@@ -7,8 +7,6 @@ import { Dog } from './Dog.js';
 import { GuineaPig } from './GuineaPig.js';
 
 export class KennelManager {
-   #allPetsInKennel = [];
-
    constructor(petConfigs) {
       this.petConfigs = petConfigs;
 
@@ -17,12 +15,10 @@ export class KennelManager {
 
    addEventListeners() {
       const petForm = document.getElementById('petForm');
-      const petDisplayer = new PetDisplayer()
 
       petForm.addEventListener("submit", e => {
          e.preventDefault();
          this.addPetToKennel();
-         petDisplayer.showAllPets(this.#allPetsInKennel);
       })
    }
 
@@ -50,7 +46,7 @@ export class KennelManager {
             break;
       }
 
-      this.#allPetsInKennel.push(newPet);
-      console.log(this.#allPetsInKennel);
+      const petDisplayer = new PetDisplayer()
+      petDisplayer.showPet(newPet);
    }
 }
