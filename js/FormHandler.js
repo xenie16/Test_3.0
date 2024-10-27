@@ -2,7 +2,10 @@
 
 export class FormHandler {
    #animalTypeSelect = document.getElementById('animalTypeSelect');
+   #petDetails = document.getElementById('petDetails');
+   #petNameInput = document.getElementById('petNameInput');
    #selectedPet;
+   #changeListener;
 
    constructor(petConfigs) {
       this.petConfigs = petConfigs
@@ -10,11 +13,13 @@ export class FormHandler {
    }
    modifyForm() {
       this.addPetTypes();
+      this.updateDetailsField()
       this.addPetDetails();
    }
 
    addPetTypes() {
       const animalTypeSelect = this.#animalTypeSelect;
+
       animalTypeSelect.innerHTML = '';
 
       for (const property in this.petConfigs) {
@@ -27,58 +32,77 @@ export class FormHandler {
    }
 
    addPetDetails() {
-      this.updateDetailsField();
-
-      const petDetails = document.getElementById('petDetails');
-      const petConfigs = this.petConfigs;
+      const petDetails = this.#petDetails;
       const selectedPet = this.#selectedPet;
 
       petDetails.innerHTML = '';
 
-      for (const [key, value] of Object.entries(petConfigs)) {
+      for (const [key, value] of Object.entries(this.petConfigs)) {
          if (key === selectedPet) {
             petDetails.textContent = value['extra info'];
 
             if (value.dropdownOptions) {
-               const select = document.createElement('select');
-               select.id = 'petDetailInput';
-
-               value.dropdownOptions.forEach((element) => {
-                  const option = document.createElement('option');
-                  option.textContent = element;
-                  option.value = element;
-
-                  select.appendChild(option);
-               })
-               petDetails.appendChild(select);
+               this.createDropdown(value);
             } else {
-               const input = document.createElement('input');
-               input.type = 'text';
-               input.id = 'petDetailInput';
-               input.required = true;
-
-               petDetails.appendChild(input);
+               this.createTextInput();
             }
          }
       }
    }
 
+   createDropdown(value) {
+      const select = document.createElement('select');
+      select.id = 'petDetailInput';
+
+      value.dropdownOptions.forEach((element) => {
+         const option = document.createElement('option');
+         option.textContent = element;
+         option.value = element;
+
+         select.appendChild(option);
+      })
+      petDetails.appendChild(select);
+   }
+
+   createTextInput() {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = 'petDetailInput';
+      input.required = true;
+
+      petDetails.appendChild(input);
+   }
+
    updateDetailsField() {
+      if (this.#changeListener) {
+         this.#animalTypeSelect.removeEventListener("change", this.#changeListener);
+      }
+
       this.#selectedPet = this.#animalTypeSelect.value;
 
-      this.#animalTypeSelect.addEventListener("change", () => {
+      this.#changeListener = this.debounce(() => {
          this.#selectedPet = this.#animalTypeSelect.value;
-         this.addPetDetails()
-      })
+         this.addPetDetails();
+      }, 100);
+
+      this.#animalTypeSelect.addEventListener("change", this.#changeListener);
+   }
+
+   debounce(func, wait) {
+      let timeout;
+      return (...args) => {
+         clearTimeout(timeout);
+         timeout = setTimeout(() => func.apply(this, args), wait);
+      };
    }
 
    resetForm() {
-      const petTypeSelect = document.getElementById('animalTypeSelect');
-      const petNameInput = document.getElementById('petNameInput');
-      const petDetailInput = document.getElementById('petDetailInput');
+      this.#animalTypeSelect.selectedIndex = 0;
+      this.#petNameInput.value = '';
 
-      petTypeSelect.selectedIndex = 0;
-      petNameInput.value = '';
-      petDetailInput.value = '';
+      this.#selectedPet = this.#animalTypeSelect.value;
+
+      this.addPetDetails();
+
    }
 }
