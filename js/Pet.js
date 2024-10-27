@@ -9,27 +9,22 @@ export class Pet {
    }
 
    feedPet() {
-      console.log('fed')
       if (this.energyLevel + 10 >= 100) {
          this.energyLevel = 100;
       } else {
          this.energyLevel += 10;
       }
 
-      console.log(this.energyLevel)
       return this.energyLevel;
    }
 
    playWithPet() {
-      console.log('play')
-
       if (this.energyLevel - 10 <= 0) {
          this.energyLevel = 0
       } else {
          this.energyLevel -= 10;
       }
 
-      console.log(this.energyLevel)
       return this.energyLevel;
    }
 
