@@ -101,14 +101,7 @@ export class PetDisplayer {
    updateEnergy({ petId, newEnergyLevel }) {
       let energyLevelLi;
 
-      if (petId) {
-         energyLevelLi = document.querySelector(`#${petId} .energyLevel`);
-         energyLevelLi.textContent = `Energy: ${newEnergyLevel}`;
-      } else {
-         energyLevelLi = document.querySelectorAll('.energyLevel');
-         energyLevelLi.forEach(liItem => {
-            liItem.textContent = `Energy: ${newEnergyLevel}`;
-         })
-      }
+      energyLevelLi = document.querySelector(`#${petId} .energyLevel`);
+      energyLevelLi.textContent = `Energy: ${newEnergyLevel}`;
    }
 }
